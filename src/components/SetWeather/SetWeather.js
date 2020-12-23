@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 
+import './SetWeather.css'
+
 const SetWeather = props => {
     const lat = props.lat, lng = props.lng
     var name,temp,img
@@ -11,7 +13,7 @@ const SetWeather = props => {
             setData(res.data)
         })
     },[dataUrl])
-    if(data == null) return <h1> Loading data.. </h1>
+    if(data == null) return <h1 className={props.className}> Loading data.. </h1>
     else {
         {
             name = data["name"] 
@@ -19,10 +21,10 @@ const SetWeather = props => {
             img = data["weather"][0].icon
         }
         return(
-            <div className= "tempCard">
+            <div className= "temp-card">
                 <h1> Name : {name} </h1>
-                <h1> Temperature(celsius) : {temp} </h1>
-                <img src={img} alt="temp-pic"/>
+                <h1> Temperature: {temp}<span>&#8451;</span></h1>
+                <span><img src={img} alt="temp-pic"/></span>
             </div>
         )
     }
